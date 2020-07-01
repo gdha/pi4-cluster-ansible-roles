@@ -1,0 +1,6 @@
+---
+os_passwordless_sudoers: []
+my_user: gdha
+my_uid: 1001
+my_gid: 1001
+my_password: $1$SomeZout$3JUHmV2fUtly5E1aURrj51

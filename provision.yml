@@ -1,0 +1,10 @@
+---
+# Run the playbook as follow:
+# ansible-playbook provision.yml -u ubuntu -k -b
+- hosts: all
+  roles:
+  - user
+  - base
+  - rpi
+  - os
+  - ssh

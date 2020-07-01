@@ -1,0 +1,70 @@
+---
+
+- debug:
+    msg: "creating user {{ my_user }} and OpenSSH public key distribution"
+
+- name: Creating admin group
+  group: name=admin system=yes state=present
+
+- name: Add group {{ my_user }} (1001)
+  become: yes
+  group:
+    name: "{{ my_user }}"
+    gid: "{{ my_gid }}"
+    state: present
+
+- name: Add user '{{ my_user }}' with specific uid (1001) and group '{{ my_user }}' (1001) and secondary group 'admin'
+  become: yes
+  user:
+    name: "{{ my_user }}"
+    comment: Gratien Dhaese
+    uid: "{{ my_uid }}"
+    group: "{{ my_user }}"
+    groups: admin,sudo
+    expires: -1
+    create_home: yes
+    shell: /bin/bash
+    append: yes
+    state: present
+    system: yes
+    password: "{{ my_password }}"
+
+- name: Create the /home/{{ my_user }}/.ssh directory
+  become: yes
+  file:
+    path: /home/{{ my_user }}/.ssh
+    state: directory
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+    mode: 0700
+
+- name: Copy /home/{{ my_user }}/.ssh/id_rsa.pub to remote nodes
+  become: yes
+  copy:
+    src: id_rsa.pub.encrypted
+    dest: /home/{{ my_user }}/.ssh/id_rsa.pub
+    mode: 0644
+    owner: "{{ my_user }}"
+    group: "{{ my_user }}"
+
+- name: Append public ssh key of {{ my_user }} to authorized_keys
+  become: yes
+  authorized_key:
+    user: "{{ my_user }}"
+    path: /home/{{ my_user }}/.ssh/authorized_keys
+    state: present
+    key: "{{ lookup('file', item) }}"
+  with_fileglob:
+    - "/home/gdha/.ssh/*.pub"
+    - "/home/ubuntu/.ssh/*.pub"
+
+- name: Create /etc/sudoers.d/{{ my_user }}-sudoers file
+  become: yes
+  lineinfile:
+    path: /etc/sudoers.d/{{ my_user }}-sudoers
+    create: yes
+    state: present
+    line: "{{ my_user }} ALL=(ALL) NOPASSWD:ALL"
+    owner: root
+    group: root
+    mode: 0440

@@ -1,0 +1,3 @@
+---
+# The os_passwordless_sudoers array is defined in the inventory.yml file
+# os_passwordless_sudoers: []
