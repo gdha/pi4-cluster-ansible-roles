@@ -55,7 +55,7 @@
     state: present
     key: "{{ lookup('file', item) }}"
   with_fileglob:
-    - "/home/gdha/.ssh/*.pub"
+    - "/home/{{ my_user }}/.ssh/*.pub"
     - "/home/ubuntu/.ssh/*.pub"
 
 - name: Create /etc/sudoers.d/{{ my_user }}-sudoers file

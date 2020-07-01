@@ -1,9 +1,12 @@
-# cluster-ansible-playbooks
-Ansible playbooks for common provisioning tasks on Raspberry Pi 4 cluster
+# Pi4-cluster-ansible-playbooks
+Ansible playbooks for common provisioning tasks on Raspberry Pi 4 cluster. We want to provision with our own account
 
 ## Requirements
-1. Python 3
-1. Ansible
+1. Ubuntu 20.04 LTS Raspberry Pi 64-bit version 
+2. Python 3
+3. Ansible
+4. Default user is 'ubuntu'
+5. Define your account in files inventory.yml and user/defaults/main.yml
 
 ## Using a vault for the OpenSSH public key
 ```bash
