@@ -9,3 +9,8 @@ base_apt_packages:
 - dphys-swapfile
 - python-is-python3
 - sshpass
+- ca-certificates
+- curl
+- gnupg-agent
+- software-properties-common
+- jq

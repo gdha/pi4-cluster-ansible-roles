@@ -3,9 +3,9 @@ all:
   vars:
     ssh_admin_key: ~/.ssh/id_rsa.pub
     os_passwordless_sudoers:
-    - ubuntu
     - gdha
-    ansible_user: ubuntu
+    - ubuntu
+    ansible_user: gdha
     become: yes
   hosts:
     n[1:5]:

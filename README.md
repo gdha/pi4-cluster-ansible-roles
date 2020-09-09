@@ -20,7 +20,7 @@ $ ansible-vault encrypt --vault-password-file .my_password ~/.ssh/id_rsa.pub --o
 Encryption successful
 
 $ ansible-vault view --vault-password-file .my_password user/files/id_rsa.pub.encrypted
-ssh-rsa A....
+ssh-rsa AAAAA....
 ```
 
 ## Usage
