@@ -14,3 +14,4 @@ base_apt_packages:
 - gnupg-agent
 - software-properties-common
 - jq
+- net-tools
