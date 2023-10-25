@@ -8,4 +8,4 @@ all:
     ansible_user: gdha
     become: yes
   hosts:
-    n[1:5]:
+    n[1:6]:
