@@ -15,3 +15,4 @@ base_apt_packages:
 - software-properties-common
 - jq
 - net-tools
+- nfs-common
