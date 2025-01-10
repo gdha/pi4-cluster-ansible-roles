@@ -6,14 +6,14 @@
 - name: Creating admin group
   group: name=admin system=yes state=present
 
-- name: Add group {{ my_user }} (1001)
+- name: Add group {{ my_user }} (1003)
   become: yes
   group:
     name: "{{ my_user }}"
     gid: "{{ my_gid }}"
     state: present
 
-- name: Add user '{{ my_user }}' with specific uid (1001) and group '{{ my_user }}' (1001) and secondary group 'admin'
+- name: Add user '{{ my_user }}' with specific uid (1000) and group '{{ my_user }}' (1003) and secondary group 'admin'
   become: yes
   user:
     name: "{{ my_user }}"

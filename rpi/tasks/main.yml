@@ -12,6 +12,8 @@
 #	libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffff95b60000)
 #	/lib/ld-linux-aarch64.so.1 (0x0000ffff95d5a000)
 #	libdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x0000ffff95b4c000)
+### Compilation fails in Ubuntu 24.04
+
 - name: Create directory /opt/vc/bin
   file:
     path: /opt/vc/bin
@@ -21,63 +23,63 @@
     group: root
     mode: 0755
 
-- name: copy tvservice to /opt/vc/bin
-  copy:
-    src: /opt/vc/bin/tvservice
-    dest: /opt/vc/bin/tvservice
-    mode: 0755
+#- name: copy tvservice to /opt/vc/bin
+#  copy:
+#    src: /opt/vc/bin/tvservice
+#    dest: /opt/vc/bin/tvservice
+#    mode: 0755
 
-- name: Create the /opt/vc/lib directory
-  file:
-    path: /opt/vc/lib
-    state: directory
-    recurse: yes
-    owner: root
-    group: root
-    mode: 0755
+#- name: Create the /opt/vc/lib directory
+#  file:
+#    path: /opt/vc/lib
+#    state: directory
+#    recurse: yes
+#    owner: root
+#    group: root
+#    mode: 0755
 
-- name: Copy /opt/vc/lib/libvchiq_arm.so
-  copy:
-    src: /opt/vc/lib/libvchiq_arm.so
-    dest: /opt/vc/lib/libvchiq_arm.so
-    mode: 0755
+#- name: Copy /opt/vc/lib/libvchiq_arm.so
+#  copy:
+#    src: /opt/vc/lib/libvchiq_arm.so
+#    dest: /opt/vc/lib/libvchiq_arm.so
+#    mode: 0755
 
-- name: Copy /opt/vc/lib/libvcos.so
-  copy:
-    src: /opt/vc/lib/libvcos.so
-    dest: /opt/vc/lib/libvcos.so
-    mode: 0755
+#- name: Copy /opt/vc/lib/libvcos.so
+#  copy:
+#    src: /opt/vc/lib/libvcos.so
+#    dest: /opt/vc/lib/libvcos.so
+#    mode: 0755
 
-- name: add /opt/vc/lib to /etc/ld.so.conf file
-  lineinfile:
-    dest: /etc/ld.so.conf
-    state: present
-    regexp: '^/opt/vc/lib'
-    line: '/opt/vc/lib'
+#- name: add /opt/vc/lib to /etc/ld.so.conf file
+#  lineinfile:
+#    dest: /etc/ld.so.conf
+#    state: present
+#    regexp: '^/opt/vc/lib'
+#    line: '/opt/vc/lib'
 
 - name: Run ldconfig
   command: ldconfig
 
 
-- name: Check if HDMI is on
-  command: /opt/vc/bin/tvservice -s
-  register: rpi_tvservice_result
-  changed_when: false
+#- name: Check if HDMI is on
+#  command: /opt/vc/bin/tvservice -s
+#  register: rpi_tvservice_result
+#  changed_when: false
 
-- name: Switch off HDMI
-  command: /opt/vc/bin/tvservice -o
-  when: rpi_tvservice_off_state not in rpi_tvservice_result.stdout
+#- name: Switch off HDMI
+#  command: /opt/vc/bin/tvservice -o
+#  when: rpi_tvservice_off_state not in rpi_tvservice_result.stdout
 
-- name: Switch HDMI off and set off on boot
-  block:
-    - name: Ensure rc.local exists
-      become: yes
-      file:
-        path: '/etc/rc.local'
-        state: touch
-    - name: Switch off HDMI on boot
-      become: yes
-      lineinfile:
-        path: '/etc/rc.local'
-        line: /opt/vc/bin/tvservice -o
-        state: present
+#- name: Switch HDMI off and set off on boot
+#  block:
+#    - name: Ensure rc.local exists
+#      become: yes
+#      file:
+#        path: '/etc/rc.local'
+#        state: touch
+#    - name: Switch off HDMI on boot
+#      become: yes
+#      lineinfile:
+#        path: '/etc/rc.local'
+#        line: /opt/vc/bin/tvservice -o
+#        state: present

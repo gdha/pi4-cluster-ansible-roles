@@ -4,7 +4,6 @@ all:
     ssh_admin_key: ~/.ssh/id_rsa.pub
     os_passwordless_sudoers:
     - gdha
-    - ubuntu
     ansible_user: gdha
     become: yes
   hosts:
