@@ -5,6 +5,7 @@ all:
     os_passwordless_sudoers:
     - gdha
     ansible_user: gdha
+    ansible_python_interpreter: /usr/bin/python3
     become: yes
   hosts:
     n[1:6]:

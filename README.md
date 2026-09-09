@@ -3,7 +3,7 @@ Ansible playbooks for common provisioning tasks on Raspberry Pi 4 cluster. We wa
 
 ## Requirements
 1. Ubuntu 24.04 LTS Raspberry Pi 64-bit version 
-2. Python 3
+2. Python 3 available at `/usr/bin/python3`
 3. Ansible
 4. Default user is 'your-account-name'
 5. Define your account in files inventory.yml and user/defaults/main.yml
